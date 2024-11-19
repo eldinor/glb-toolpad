@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 //import './App.css';
 import { Engine } from '@babylonjs/core';
 import { Viewer } from '@babylonjs/viewer';
+import Emitter from '../EventEmitter';
 
 function ViewerComponent({handleOpen }) {
-
 
   const canvasRef = useRef(null);
   const viewerRef = useRef<Viewer | null>(null);
@@ -22,10 +22,13 @@ function ViewerComponent({handleOpen }) {
       if (viewerRef.current) {
         viewerRef.current!.loadModel(file);
         console.log(file)
+
+        Emitter.emit('INPUT_FROM_MAIN', file.name);
      
         viewerRef.current.onModelChanged.add(() => {
             console.log('Model changed');
             handleOpen(file)
+
           });
       }
     }
