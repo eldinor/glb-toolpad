@@ -10,7 +10,7 @@ const NAVIGATION: Navigation = [
     title: 'Main items',
   },
   {
-    title: 'Dashboard',
+    title: "Main Page",
     icon: <DashboardIcon />,
   },
   {
@@ -21,7 +21,7 @@ const NAVIGATION: Navigation = [
 ];
 
 const BRANDING = {
-  title: 'My Toolpad Core App',
+  title: 'GLB Toolpad',
 };
 
 export default function App() {

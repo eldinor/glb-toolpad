@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babylonjs/core": "^7.34.1",
+    "@babylonjs/viewer": "^7.34.1-alpha",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^6",
@@ -15,7 +17,7 @@
     "@toolpad/core": "latest",
     "react": "^18",
     "react-dom": "^18",
-    "react-router-dom": "^6"
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@types/react": "^18",
