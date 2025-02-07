@@ -4,7 +4,7 @@ import { Engine } from '@babylonjs/core';
 import { Viewer } from '@babylonjs/viewer';
 import Emitter from '../EventEmitter';
 
-function ViewerComponent({handleOpen }) {
+function ViewerComponent({handleOpen}:any) {
 
   const canvasRef = useRef(null);
   const viewerRef = useRef<Viewer | null>(null);
@@ -14,7 +14,7 @@ function ViewerComponent({handleOpen }) {
 
 
 
-  const onDrop = (e) => {
+  const onDrop = (e:React.DragEvent) => {
     console.log("onDrop");
     const file = e.dataTransfer.files[0];
     if (file) {
@@ -42,15 +42,23 @@ function ViewerComponent({handleOpen }) {
       onInitialized: (details) => {
         console.log('DETAILS', details);
         viewerRef.current = details.viewer;
-        details.viewer.cameraAutoOrbit = {enabled:false};
+        viewerRef.current.cameraAutoOrbit = {enabled:false};
+        console.log(details.scene.meshes)
+        details.scene.clearColor.r=1
+        if(details.scene.getMeshByName("hdrSkyBox")){
+        details.scene.getMeshByName("hdrSkyBox")!.setEnabled(false)}
+        
       },
     });
 
     viewer.onEnvironmentChanged.add(() => console.log('ENV CHANGE'));
     viewer.onModelError.add(() => {
       console.log('ModelError');
+      
     });
 
+    viewer.loadEnvironment("https://cdn.jsdelivr.net/npm/@babylonjs/viewer@preview/assets/photoStudio.env",{})
+   // viewer.skyboxBlur = 1
    // viewer.loadModel(props.source);
 
 
@@ -66,6 +74,7 @@ function ViewerComponent({handleOpen }) {
       e.stopPropagation();
     }}
     onDrop={onDrop}
+
   >
     <canvas
       title="BoomBox"
